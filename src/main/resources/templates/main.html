@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Калькулятор цены недвижимости</title>
+    <link rel="stylesheet" th:href="@{/styles/main.css}"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery library -->
+</head>
+<body>
+<script>
+    const getData = () => {
+
+        const request = {
+            district: document.getElementById('district').value,
+            author_type: document.getElementById('author_type').value,
+            accommodation_type : document.getElementById('accommodation_type').value,
+            rooms_count: document.getElementById('rooms_count').value,
+            floor: document.getElementById('floor').value,
+            floors_count: document.getElementById('floors_count').value,
+            street: document.getElementById('street').value,
+            total_meters: document.getElementById('total_meters').value,
+            underground: document.getElementById('underground').value,
+            residential_complex: document.getElementById('residential_complex').value,
+            // Add other request properties similarly
+        };
+        $.ajax({
+            type: 'POST',
+            url: '/prices/getPrice',
+            data: JSON.stringify(request),
+            contentType: 'application/json',
+            success: function(response) {
+                document.getElementById("myPlaceHolder").innerHTML = response;
+            }
+        });
+        /*fetch('/prices/getPrice').then(function (response) {
+            return response.text();
+        }).then(function (html) {
+            console.log(html)
+            document.getElementById("myPlaceHolder").innerHTML += html;
+        }).catch(function (err) {
+            console.warn('Something went wrong.', err);
+        });*/
+    }
+
+</script>
+<h1>Калькулятор цены недвижимости</h1>
+<form id="costForm" th:action="@{/prices}" method="post">
+    <label for="author_type">Тип автора</label>
+    <select id="author_type" name="author_type" th:field="*{request.author_type}">
+        <option value="1" selected>Застройщик</option>
+        <option value="2">Собственник</option>
+        <option value="3">Агентство недвижимости</option>
+        <option value="4">Риелтор</option>
+    </select> <!--TODO что какой цифрой закодировано?-->
+    <br>
+    <label for="accommodation_type">Тип жилья</label>
+    <select id="accommodation_type" name="accommodation_type" th:field="*{request.accommodation_type}">
+        <option value="0" selected>Квартира</option>
+        <option value="1" selected>Пригородное жилье</option>
+    </select>
+    <br>
+
+    <label for="floor" title="Этаж должен быть целочисленным">Этаж</label>
+    <input id="floor" name="floor" type="text" pattern="\d+" th:value="1"/>
+    <br>
+
+    <label for="floors_count" title="Количество этажей должно быть целочисленным и не меньше этажа">Количество этажей</label>
+    <input id="floors_count" name="floors_count" th:value="1" type="number" step="1" min="1"/>
+    <br>
+
+    <label for="rooms_count" title="Количество комнат должно быть целочисленным">Количество комнат</label>
+    <input id="rooms_count" name="rooms_count" type="number" step="1" th:value='2'/>
+    <br>
+
+    <label for="total_meters" title="Общая площадь должна содержать не более 2 знаков после запятой">Общая площадь, м2</label>
+    <input id="total_meters" name="total_meters" type="number" step="0.01" th:value='25'/>
+    <br>
+
+
+    <label for="district">Район</label>
+    <select id="district" name="district">
+        <option th:each="distnct : ${districts}" th:value="${distnct.id}" th:text="${distnct.name}"></option>
+    </select>
+    <br>
+
+    <label for="street">Улица</label>
+    <select id="street" name="street">
+        <option th:each="street : ${streets}" th:value="${street.id}" th:text="${street.name}"></option>
+    </select>
+    <br>
+
+    <label for="underground">Метро</label>
+    <select id="underground" name="underground">
+        <option th:each="subway : ${subways}" th:value="${subway.id}" th:text="${subway.name}"></option>
+    </select>
+    <br>
+
+    <label for="residential_complex">Жилой комплекс</label>
+    <select id="residential_complex" name="residential_complex">
+        <option th:each="rcom : ${res_comps}" th:value="${rcom.id}" th:text="${rcom.name}"></option>
+    </select>
+    <br>
+    <button type="button" onclick="getData()">Get Price</button>
+    <div id="myPlaceHolder"></div>
+
+</form>
+
+<!--<script>
+    function getPrice() {
+        const request = {
+            author_type: document.getElementById('author_type').value,
+            rooms_count: document.getElementById('rooms_count').value,
+            // Add other request properties similarly
+        };
+        $.ajax({
+            type: 'POST',
+            url: '/prices',
+            data: JSON.stringify(request),
+            contentType: 'application/json',
+            success: function(response) {
+                $('#price').text(response);
+            }
+        });
+    }
+</script>-->
+</body>
+</html>
+
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Калькулятор цены недвижимости</title>
+    <link rel="stylesheet" th:href="@{/styles/main.css}"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+<h1>Калькулятор цены недвижимости</h1>
+<form action=th:action="@{localhost:8080/prices}" method="post">
+
+    <label for="author_type">Тип автора</label>
+    <input id="author_type" name="author_type" type="number" th:field="*{request.author_type}" value='1'/>
+    <br>
+    <label for="accommodation_type">Тип жилья</label>
+    <input id="accommodation_type" name="accommodation_type" type="number" th:field="*{request.accommodation_type}" value='0'/>
+    <br>
+
+    <label for="floor">Этаж</label>
+    <input id="floor" name="floor" type="number" th:field="*{request.floor}" value='1'/>
+    <br>
+
+    <label for="floors_count">Количество этажей</label>
+    <input id="floors_count" name="floors_count" th:field="*{request.floors_count}" type="number" value='5'/>
+    <br>
+
+    <label for="rooms_count">Количество комнат</label>
+    <input id="rooms_count" name="rooms_count" type="number" th:field="*{request.rooms_count}" value='2'/>
+    <br>
+
+    <label for="total_meters">Общая площадь</label>
+    <input id="total_meters" name="total_meters" type="number" th:field="*{request.total_meters}" value='5'/>
+    <br>
+
+    <label for="district">Район</label>
+    <input id="district" name="district" type="number" th:field="*{request.district}" value='1'/>
+    <br>
+
+    <label for="street">Улица</label>
+    <input id="street" name="street" type="number" th:field="*{request.street}" value='1'/>
+    <br>
+
+    <label for="underground">Метро</label>
+    <input id="underground" name="underground" type="number" th:field="*{request.underground}" value='1'/>
+    <br>
+
+    <label for="residential_complex">Жилой комплекс</label>
+    <input id="residential_complex" name="residential_complex" type="number" th:field="*{request.residential_complex}" value='0'/>
+    <br>
+    <button type="button" onclick="getPrice()">Get Price</button>
+</form>
+<div id="price" th:text="${cost}"></div>
+<script>
+    function getPrice() {
+        const roomNumber = document.getElementById('request').value;
+        $.ajax({
+            type: 'POST',
+            url: '/prices',
+            data: JSON.stringify({ roomNumber: roomNumber }),
+            contentType: 'application/json',
+            success: function(response) {
+                $('#price').html(response);
+            }
+        });
+    }
+</script>
+</body>
+</html>-->
