@@ -64,12 +64,15 @@
     </select>
     <br>
     </div>
+    <div class="line2">
+
     <label for="floor" title="Этаж должен быть целочисленным">Этаж</label>
-    <input class="short" id="floor" name="floor" type="text" pattern="\d+" th:value="1"/>
+    <input class="short" id="floor" name="floor" type="number" step="1" min="1" th:value="1"/>
 
     <label for="floors_count" title="Количество этажей должно быть целочисленным и не меньше этажа">Количество этажей</label>
     <input class="short" id="floors_count" name="floors_count" th:value="1" type="number" step="1" min="1"/>
     <br>
+    </div>
     <div class="line1">
     <label for="rooms_count" title="Количество комнат должно быть целочисленным">Количество комнат</label>
     <input class="short" id="rooms_count" name="rooms_count" type="number" step="1" th:value='2'/>
@@ -78,30 +81,39 @@
     <input class="short" id="total_meters" name="total_meters" type="number" step="0.01" th:value='25'/>
     <br>
     </div>
+    <div class="line2">
 
-    <label for="residential_complex">Жилой комплекс</label>
+    <label for="residential_complex">Жилой комплекс</label><br>
     <select id="residential_complex" name="residential_complex">
         <option th:each="rcom : ${res_comps}" th:value="${rcom.id}" th:text="${rcom.name}"></option>
     </select>
     <br>
+    </div>
 
-    <label for="district">Район</label>
+    <div class="line1">
+    <label for="district">Район</label><br>
     <select id="district" name="district">
         <option th:each="distnct : ${districts}" th:value="${distnct.id}" th:text="${distnct.name}"></option>
     </select>
     <br>
+    </div>
 
-    <label for="street">Улица</label>
+    <div class="line2">
+
+    <label for="street">Улица</label><br>
     <select id="street" name="street">
         <option th:each="street : ${streets}" th:value="${street.id}" th:text="${street.name}"></option>
     </select>
     <br>
+    </div>
 
-    <label for="underground">Метро</label>
+    <div class="line1">
+    <label for="underground">Метро</label><br>
     <select id="underground" name="underground">
         <option th:each="subway : ${subways}" th:value="${subway.id}" th:text="${subway.name}"></option>
     </select>
     <br>
+    </div>
     <button type="button" onclick="getData()">Рассчитать стоимость</button>
     <div id="myPlaceHolder"></div>
 

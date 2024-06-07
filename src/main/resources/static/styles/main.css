@@ -14,7 +14,6 @@ body {
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    background: #e0fbfc;
 }
 main {
     flex: 1;
@@ -29,6 +28,7 @@ h1{
     margin: 20px;
     font-size: 40px;
     color: #ee6c4d;
+    text-align: center;
 
 }
 input,
@@ -51,6 +51,10 @@ input, select {
 select{
     background-color: white;
 }
+label{
+    padding: 10px;
+
+}
 button {
     cursor: pointer;
     background-color: #3d5a80;
@@ -58,7 +62,8 @@ button {
     padding: 10px 15px;
     border: 0;
     transition: background-color 0.3s ease;
-    margin-top: 20px;
+    display: block;
+    margin: 0 auto;
 }
 
 button:hover {
@@ -73,12 +78,26 @@ button:hover {
     width: 200px;
 }
 .line1{
-    background: #6a8dbe;
+    background: #a0c3f4;
     border-radius: 10px;
     padding: 20px;
     font-weight: bold;
 }
-
+.line2{
+    border-radius: 10px;
+    padding: 20px;
+    font-weight: bold;
+}
+form{
+    background: #cce1fd;
+    padding: 20px;
+}
 label[for="rooms_count"], label[for="total_meters"], label[for="author_type"], label[for="accommodation_type"] {
     color: white;
+}
+button{
+    margin-top: 20px;
+}
+input#total_meters{
+    width: 150px;
 }
