@@ -47,39 +47,43 @@
     }
 
 </script>
-<h1>Калькулятор цены недвижимости</h1>
+<h1>Калькулятор цены недвижимости<br/>в Казани</h1>
 <form id="costForm" th:action="@{/prices}" method="post">
+    <div class="line1">
     <label for="author_type">Тип автора</label>
-    <select id="author_type" name="author_type" th:field="*{request.author_type}">
+    <select class="mid" id="author_type" name="author_type" th:field="*{request.author_type}">
         <option value="1" selected>Застройщик</option>
         <option value="2">Собственник</option>
         <option value="3">Агентство недвижимости</option>
         <option value="4">Риелтор</option>
     </select> <!--TODO что какой цифрой закодировано?-->
-    <br>
     <label for="accommodation_type">Тип жилья</label>
-    <select id="accommodation_type" name="accommodation_type" th:field="*{request.accommodation_type}">
+    <select class="mid" id="accommodation_type" name="accommodation_type" th:field="*{request.accommodation_type}">
         <option value="0" selected>Квартира</option>
         <option value="1" selected>Пригородное жилье</option>
     </select>
     <br>
-
+    </div>
     <label for="floor" title="Этаж должен быть целочисленным">Этаж</label>
-    <input id="floor" name="floor" type="text" pattern="\d+" th:value="1"/>
-    <br>
+    <input class="short" id="floor" name="floor" type="text" pattern="\d+" th:value="1"/>
 
     <label for="floors_count" title="Количество этажей должно быть целочисленным и не меньше этажа">Количество этажей</label>
-    <input id="floors_count" name="floors_count" th:value="1" type="number" step="1" min="1"/>
+    <input class="short" id="floors_count" name="floors_count" th:value="1" type="number" step="1" min="1"/>
     <br>
-
+    <div class="line1">
     <label for="rooms_count" title="Количество комнат должно быть целочисленным">Количество комнат</label>
-    <input id="rooms_count" name="rooms_count" type="number" step="1" th:value='2'/>
-    <br>
+    <input class="short" id="rooms_count" name="rooms_count" type="number" step="1" th:value='2'/>
 
     <label for="total_meters" title="Общая площадь должна содержать не более 2 знаков после запятой">Общая площадь, м2</label>
-    <input id="total_meters" name="total_meters" type="number" step="0.01" th:value='25'/>
+    <input class="short" id="total_meters" name="total_meters" type="number" step="0.01" th:value='25'/>
     <br>
+    </div>
 
+    <label for="residential_complex">Жилой комплекс</label>
+    <select id="residential_complex" name="residential_complex">
+        <option th:each="rcom : ${res_comps}" th:value="${rcom.id}" th:text="${rcom.name}"></option>
+    </select>
+    <br>
 
     <label for="district">Район</label>
     <select id="district" name="district">
@@ -98,13 +102,7 @@
         <option th:each="subway : ${subways}" th:value="${subway.id}" th:text="${subway.name}"></option>
     </select>
     <br>
-
-    <label for="residential_complex">Жилой комплекс</label>
-    <select id="residential_complex" name="residential_complex">
-        <option th:each="rcom : ${res_comps}" th:value="${rcom.id}" th:text="${rcom.name}"></option>
-    </select>
-    <br>
-    <button type="button" onclick="getData()">Get Price</button>
+    <button type="button" onclick="getData()">Рассчитать стоимость</button>
     <div id="myPlaceHolder"></div>
 
 </form>

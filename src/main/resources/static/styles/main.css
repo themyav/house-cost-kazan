@@ -9,28 +9,13 @@
 
     font-size: 18px;
 }
-
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    background: #e0fbfc;
 }
-
-header,
-footer {
-    width: 100%;
-    padding: 20px;
-    margin: 10px;
-    background-color: #f5f5f5;
-    text-align: center;
-}
-
-footer {
-    position: absolute;
-    bottom: 0;
-}
-
 main {
     flex: 1;
     width: 100%;
@@ -40,8 +25,12 @@ main {
     justify-content: center;
     overflow: auto;
 }
+h1{
+    margin: 20px;
+    font-size: 40px;
+    color: #ee6c4d;
 
-
+}
 input,
 button,
 select {
@@ -50,9 +39,8 @@ select {
     font-weight: bold;
     border-radius: 8px;
 }
-
 input, select {
-    width: 80%;
+    width: 50%;
     height: 5%;
     border: 3px solid #587d71;
     padding: 10px;
@@ -60,164 +48,37 @@ input, select {
     font-size: 20px;
 
 }
-
-
-
+select{
+    background-color: white;
+}
 button {
     cursor: pointer;
-    background-color: #008000;
+    background-color: #3d5a80;
     color: white;
     padding: 10px 15px;
     border: 0;
     transition: background-color 0.3s ease;
+    margin-top: 20px;
 }
 
 button:hover {
-    background-color: #4daa57;
+    background-color: #98c1d9;
+
 }
-table {
-    border-spacing: 0;
-    border: 3px solid #587d71;
+.short{
+    width: 100px;
+}
+
+.mid{
+    width: 200px;
+}
+.line1{
+    background: #6a8dbe;
     border-radius: 10px;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    padding: 20px;
+    font-weight: bold;
 }
 
-table#partnersTable {
-    width: 100%;
-    margin: 0 auto;
-}
-
-.partnersCell {
-    background: white;
-}
-
-tr:hover {
-    background: #f9eccc;
-}
-
-td, th {
-    padding: 10px;
-    border-left: 3px solid;
-    border-top: 3px solid #587d71;
-}
-
-th {
-    background: #b5dda4;
-    border-top: none;
-}
-
-
-
-td:first-child, th:first-child {
-    border-left: none;
-}
-
-/* из-за background */
-
-th:first-child {
-    border-top-left-radius: 10px;
-}
-
-th:last-child {
-    border-top-right-radius: 10px;
-}
-
-tr#partnersTable {
-    background: white;
-}
-
-th#partnersTable {
-    background: white;
-}
-
-div {
-    margin-bottom: 10px;
-    overflow: auto;
-    max-height: calc(100vh - 250px);
-}
-
-div#balanceChange, div#registration, div#loginForm {
-    background: #b5dda4;
-    border-radius: 8px;
-}
-
-div#loginForm {
-    border: 0;
-    text-align: center;
-}
-
-div#partnersList {
-    margin-right: 10px;
-    text-align: center;
-}
-
-div#accessChange {
-    margin-left: 10px;
-}
-
-div#accessChange, div#partnersList {
-    background: #f9eccc;
-    border-radius: 8px;
-
-}
-
-h1 {
-    font-size: 30px;
-    color: #754668;
-}
-
-h2 {
-    font-size: 25px;
-}
-
-.column-container {
-    display: flex;
-}
-
-.column {
-    flex: 1; /* Ensures both columns take up equal width */
-    padding: 10px;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-}
-
-.middle-column {
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    padding: 10px;
-    width: 30%;
-    margin-top: 10px;
-}
-
-#userAccountsList {
-    text-align: center;
-}
-
-
-div#registration, div#loginForm {
-    height: fit-content;
-}
-
-.buttonTable {
-    border: white;
-    border-radius: 0;
-}
-
-.buttonCell {
-    border-left: 0;
-    border-top: 0;
-
-}
-
-.buttonRow:hover, .accountRow:hover {
-    background: none;
-}
-
-#additionalButton {
-    background: lightgray;
-    color: #754668;
+label[for="rooms_count"], label[for="total_meters"], label[for="author_type"], label[for="accommodation_type"] {
+    color: white;
 }
