@@ -1,22 +1,22 @@
-package com.ml.housecost;
+package com.ml.housecost.message;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Request {
-    public Integer roomNumber;
-    public Integer district;
     public Integer author_type;
     public Integer accommodation_type;
     public Integer floor;
     public Integer floors_count;
     public Integer rooms_count;
     public Integer total_meters;
+    public Integer district;
     public Integer street;
-
+    public Integer underground;
+    public Integer residential_complex;
+    
     public Integer getAuthor_type() {
         return author_type;
     }
@@ -89,15 +89,6 @@ public class Request {
         this.residential_complex = residential_complex;
     }
 
-    public Integer underground;
-    public Integer residential_complex;
-    public Integer getRoomNumber() {
-        return roomNumber;
-    }
-
-    public void setRoomNumber(Integer roomNumber) {
-        this.roomNumber = roomNumber;
-    }
 
     public Integer getDistrict() {
         return district;
